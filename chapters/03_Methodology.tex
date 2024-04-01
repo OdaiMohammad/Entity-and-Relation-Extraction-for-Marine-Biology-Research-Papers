@@ -1,3 +1,13 @@
 % %!TEX root = ../main.tex
 \chapter{Methodology}
 \label{chp:methodology}
+
+\section{Problem Definition}
+Given \(X\) an input sentence consisting of \(n\) tokens \(x_1,x_2,...,x_n\). Let \(S = {s_1, s_2,...,s_m}\) be all the possible spans in \(X\) of up to length \(L\) and \(START(i)\) and \(END(i)\) denote start and end indices of \(s_i\). The problem can be decomposed into two sub-tasks:
+
+\textbf{Named entity recognition} Let \(E\) denote a set of pre-defined entity types. The named entity recognition task is, for each span \(s_i \in S\), to predict an entity type \[y_e(s_i) \in E\] or, span \(s_i\) is not an entity: \[y_e(s_i) =\epsilon\]
+
+The output of the task is \[Y_e = {(s_i , e) : s_i \in S, e \in E}\].
+
+
+\textbf{Relation extraction} Let \(R\) denote a set of predefined relation types. The task is, for every pair of spans \(si \in S\), \(sj \in S\), to predict a relation type \[y_r(s_i , s_j ) \in R\], or there is no relation between them: \[y_r(s_i , s_j ) =\epsilon\]. The output of the task is \[Y_r = {(s_i , s_j , r) : s_i , s_j \in S, r \in R}\].
