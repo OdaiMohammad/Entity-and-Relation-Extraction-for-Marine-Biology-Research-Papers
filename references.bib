@@ -1,12 +1,3 @@
-@article{Zhong2020AFE,
-  title={A Frustratingly Easy Approach for Joint Entity and Relation Extraction},
-  author={Zexuan Zhong and Danqi Chen},
-  journal={ArXiv},
-  year={2020},
-  volume={abs/2010.12812},
-  url={https://api.semanticscholar.org/CorpusID:232320859}
-}
-
 @article{Goyal2018RNE,
 author = {Goyal, Archana and Gupta, Vishal and Kumar, Manish},
 year = {2018},
@@ -154,6 +145,15 @@ doi = {https://doi.org/10.35111/m0kp-4w25},
     doi = "10.18653/v1/P17-1113",
     pages = "1227--1236",
     abstract = "Joint extraction of entities and relations is an important task in information extraction. To tackle this problem, we firstly propose a novel tagging scheme that can convert the joint extraction task to a tagging problem.. Then, based on our tagging scheme, we study different end-to-end models to extract entities and their relations directly, without identifying entities and relations separately. We conduct experiments on a public dataset produced by distant supervision method and the experimental results show that the tagging based methods are better than most of the existing pipelined and joint learning methods. What{'}s more, the end-to-end model proposed in this paper, achieves the best results on the public dataset.",
+}
+
+@article{Zhong2020AFE,
+  title={A Frustratingly Easy Approach for Joint Entity and Relation Extraction},
+  author={Zexuan Zhong and Danqi Chen},
+  journal={ArXiv},
+  year={2020},
+  volume={abs/2010.12812},
+  url={https://api.semanticscholar.org/CorpusID:232320859}
 }
 
 @inproceedings{sun-etal-2019-joint,
@@ -429,3 +429,75 @@ doi = {https://doi.org/10.35111/m0kp-4w25},
   pages={159-163},
   keywords={Information retrieval;Machine learning;Probability;Natural language processing;Hidden Markov models;Text recognition;NER;Natural language processing;Supervised Learning;Naïve Bayes;features},
   doi={10.1109/ICNGCIS.2017.24}}
+
+@inproceedings{zhang-etal-2019-ernie,
+    title = "{ERNIE}: Enhanced Language Representation with Informative Entities",
+    author = "Zhang, Zhengyan  and
+      Han, Xu  and
+      Liu, Zhiyuan  and
+      Jiang, Xin  and
+      Sun, Maosong  and
+      Liu, Qun",
+    editor = "Korhonen, Anna  and
+      Traum, David  and
+      M{\`a}rquez, Llu{\'\i}s",
+    booktitle = "Proceedings of the 57th Annual Meeting of the Association for Computational Linguistics",
+    month = jul,
+    year = "2019",
+    address = "Florence, Italy",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/P19-1139",
+    doi = "10.18653/v1/P19-1139",
+    pages = "1441--1451",
+    abstract = "Neural language representation models such as BERT pre-trained on large-scale corpora can well capture rich semantic patterns from plain text, and be fine-tuned to consistently improve the performance of various NLP tasks. However, the existing pre-trained language models rarely consider incorporating knowledge graphs (KGs), which can provide rich structured knowledge facts for better language understanding. We argue that informative entities in KGs can enhance language representation with external knowledge. In this paper, we utilize both large-scale textual corpora and KGs to train an enhanced language representation model (ERNIE), which can take full advantage of lexical, syntactic, and knowledge information simultaneously. The experimental results have demonstrated that ERNIE achieves significant improvements on various knowledge-driven tasks, and meanwhile is comparable with the state-of-the-art model BERT on other common NLP tasks. The code and datasets will be available in the future.",
+}
+
+@inproceedings{baldini-soares-etal-2019-matching,
+    title = "Matching the Blanks: Distributional Similarity for Relation Learning",
+    author = "Baldini Soares, Livio  and
+      FitzGerald, Nicholas  and
+      Ling, Jeffrey  and
+      Kwiatkowski, Tom",
+    editor = "Korhonen, Anna  and
+      Traum, David  and
+      M{\`a}rquez, Llu{\'\i}s",
+    booktitle = "Proceedings of the 57th Annual Meeting of the Association for Computational Linguistics",
+    month = jul,
+    year = "2019",
+    address = "Florence, Italy",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/P19-1279",
+    doi = "10.18653/v1/P19-1279",
+    pages = "2895--2905",
+    abstract = "General purpose relation extractors, which can model arbitrary relations, are a core aspiration in information extraction. Efforts have been made to build general purpose extractors that represent relations with their surface forms, or which jointly embed surface forms with relations from an existing knowledge graph. However, both of these approaches are limited in their ability to generalize. In this paper, we build on extensions of Harris{'} distributional hypothesis to relations, as well as recent advances in learning text representations (specifically, BERT), to build task agnostic relation representations solely from entity-linked text. We show that these representations significantly outperform previous work on exemplar based relation extraction (FewRel) even without using any of that task{'}s training data. We also show that models initialized with our task agnostic representations, and then tuned on supervised relation extraction datasets, significantly outperform the previous methods on SemEval 2010 Task 8, KBP37, and TACRED",
+}
+
+@misc{peters2019knowledge,
+      title={Knowledge Enhanced Contextual Word Representations}, 
+      author={Matthew E. Peters and Mark Neumann and Robert L. Logan IV au2 and Roy Schwartz and Vidur Joshi and Sameer Singh and Noah A. Smith},
+      year={2019},
+      eprint={1909.04164},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL}
+}
+
+@inproceedings{zhang-etal-2017-position,
+    title = "Position-aware Attention and Supervised Data Improve Slot Filling",
+    author = "Zhang, Yuhao  and
+      Zhong, Victor  and
+      Chen, Danqi  and
+      Angeli, Gabor  and
+      Manning, Christopher D.",
+    editor = "Palmer, Martha  and
+      Hwa, Rebecca  and
+      Riedel, Sebastian",
+    booktitle = "Proceedings of the 2017 Conference on Empirical Methods in Natural Language Processing",
+    month = sep,
+    year = "2017",
+    address = "Copenhagen, Denmark",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/D17-1004",
+    doi = "10.18653/v1/D17-1004",
+    pages = "35--45",
+    abstract = "Organized relational knowledge in the form of {``}knowledge graphs{''} is important for many applications. However, the ability to populate knowledge bases with facts automatically extracted from documents has improved frustratingly slowly. This paper simultaneously addresses two issues that have held back prior work. We first propose an effective new model, which combines an LSTM sequence model with a form of entity position-aware attention that is better suited to relation extraction. Then we build TACRED, a large (119,474 examples) supervised relation extraction dataset obtained via crowdsourcing and targeted towards TAC KBP relations. The combination of better supervised data and a more appropriate high-capacity model enables much better relation extraction performance. When the model trained on this new dataset replaces the previous relation extraction component of the best TAC KBP 2015 slot filling system, its F1 score increases markedly from 22.2{\%} to 26.7{\%}.",
+}
