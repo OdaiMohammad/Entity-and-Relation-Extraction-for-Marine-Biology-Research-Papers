@@ -1,3 +1,22 @@
 % %!TEX root = ../main.tex
 \chapter{Experiments}
 \label{chp:experiments}
+
+\section{Datasets}
+We trained and evaluated our models using three primary datasets: the SciERC dataset \hyperref[sec:sciercdataset]{[2.2.2]}, the NYT relation extraction dataset \hyperref[sec:nytdataset]{[2.2.3.1]}, and the TACRED dataset \hyperref[sec:tacreddataset]{[2.2.3.2]}. SciERC, constructed from scientific literature abstracts, is replete with technical jargon and intricate entity relations, providing a stringent test of our model's capability to process domain-specific language and perform high-precision relation extraction. This dataset is particularly relevant to our research goal of extracting entities and relations from scientific texts, albeit within a different domain.
+
+The NYT dataset, with its array of topics derived from news articles, evaluates the model's ability to generalize across diverse general-domain topics and grasp contextual subtleties across a broad spectrum of subjects. In contrast, the TACRED dataset, which encompasses a wide array of relations and entity types from newswire and web texts focusing on people, organizations, and locations, tests the model’s effectiveness in recognizing entities and extracting relations within more structured and formal text, unlike the free-form style typical of news articles.
+
+Together, SciERC assesses our model's proficiency with technical language and complex relationships within a specialized domain, while NYT and TACRED facilitate an assessment of its adaptability and accuracy across a more varied corpus. The selection of these datasets strategically demonstrates the model's generalization capabilities. Strong performance across such diverse datasets would underscore the robustness and adaptability essential for real-world applications.
+
+\section{Evaluation metrics}
+We adhere to established evaluation protocols \cite{taille-etal-2020-lets}, we utilize the F1 measure as our principal evaluation metric for its balanced assessment of precision and recall—fundamental for accurately gauging the performance of entity and relation extraction systems.
+
+For the evaluation of the NER model, a predicted entity is only considered correct if it exactly aligns with the annotated data in terms of both span boundaries and entity type. This stringent criterion is crucial as it guarantees high precision in both the detection and classification processes. Such accuracy is imperative for downstream applications, particularly relation extraction, where the validity of relationships often hinges on the correct identification of entity types. Misclassified entities could lead to erroneous or missed relations, thereby compromising the utility of the extracted information.\\
+
+As for the RE model, we implement two distinct metrics \cite{bekoulis-etal-2018-adversarial}:\\
+\textbf{Boundaries Evaluation}: This initial, less strict metric qualifies a relation prediction as correct if it accurately identifies the span boundaries of the entities involved and correctly classifies the type of relation. This metric primarily assesses the model's ability to detect and categorize relationships based on their spatial and contextual presence in the text, without requiring the entity types to be correct. It is particularly useful for preliminary testing of a model's basic relational understanding before more comprehensive assessments.\\
+\textbf{Strict Evaluation}: This more rigorous metric extends the boundaries evaluation by also necessitating the correct classification of entity types involved in the relations. It offers a deeper, more holistic understanding of the text, challenging the model not just to detect and classify relationships accurately but also to ensure precise typing of entities. This metric is crucial for advanced applications where the interplay between entities and their relations critically informs the output, such as in detailed semantic analysis or advanced information retrieval systems.\\
+Employing these metrics allows us to meticulously evaluate the nuanced capabilities of our models, ensuring that they not only perform well statistically but also meet the practical demands of real-world applications where precision and reliability are paramount.
+
+\section{Implementation}
