@@ -1,15 +1,18 @@
 % %!TEX root = ../main.tex
 \chapter{Experiments}
 \label{chp:experiments}
+This chapter details the datasets we used for the training and evaluation of our model in section \hyperref[sec:experimentsdatasets]{[4.1]}. In section \hyperref[sec:evaluationmetrics]{[4.2]} we explain the evaluation metrics used to evaluate our model. Finally, we explain the technical implementation used in our experiments in section \hyperref[sec:implementation]{[4.3]}. The objective is to assess the robustness and adaptability of our model across different domains and setups, thereby demonstrating its practical utility in real-world applications.
 
 \section{Datasets}
-We trained and evaluated our models using three primary datasets: the SciERC dataset \hyperref[sec:sciercdataset]{[2.2.2]}, the NYT relation extraction dataset \hyperref[sec:nytdataset]{[2.2.3.1]}, and the TACRED dataset \hyperref[sec:tacreddataset]{[2.2.3.2]}. SciERC, constructed from scientific literature abstracts, is replete with technical jargon and intricate entity relations, providing a stringent test of our model's capability to process domain-specific language and perform high-precision relation extraction. This dataset is particularly relevant to our research goal of extracting entities and relations from scientific texts, albeit within a different domain.
+\label{sec:experimentsdatasets}
+Our models were trained and evaluated using three primary datasets, each chosen for its unique characteristics and relevance to our research goals: the SciERC dataset \hyperref[sec:sciercdataset]{[2.2.2]}, the NYT relation extraction dataset \hyperref[sec:nytdataset]{[2.2.3.1]}, and the TACRED dataset \hyperref[sec:tacreddataset]{[2.2.3.2]}. SciERC, constructed from scientific literature abstracts, is replete with technical jargon and intricate entity relations, providing a stringent test of our model's capability to process domain-specific language and perform high-precision relation extraction. This dataset is particularly relevant to our research goal of extracting entities and relations from scientific texts, albeit within a different domain.
 
 The NYT dataset, with its array of topics derived from news articles, evaluates the model's ability to generalize across diverse general-domain topics and grasp contextual subtleties across a broad spectrum of subjects. In contrast, the TACRED dataset, which encompasses a wide array of relations and entity types from newswire and web texts focusing on people, organizations, and locations, tests the model’s effectiveness in recognizing entities and extracting relations within more structured and formal text, unlike the free-form style typical of news articles.
 
 Together, SciERC assesses our model's proficiency with technical language and complex relationships within a specialized domain, while NYT and TACRED facilitate an assessment of its adaptability and accuracy across a more varied corpus. The selection of these datasets strategically demonstrates the model's generalization capabilities. Strong performance across such diverse datasets would underscore the robustness and adaptability essential for real-world applications.
 
 \section{Evaluation metrics}
+\label{sec:evaluationmetrics}
 We adhere to established evaluation protocols \cite{taille-etal-2020-lets}, we utilize the F1 measure as our principal evaluation metric for its balanced assessment of precision and recall—fundamental for accurately gauging the performance of entity and relation extraction systems.
 
 For the evaluation of the NER model, a predicted entity is only considered correct if it exactly aligns with the annotated data in terms of both span boundaries and entity type. This stringent criterion is crucial as it guarantees high precision in both the detection and classification processes. Such accuracy is imperative for downstream applications, particularly relation extraction, where the validity of relationships often hinges on the correct identification of entity types. Misclassified entities could lead to erroneous or missed relations, thereby compromising the utility of the extracted information.\\
@@ -20,3 +23,53 @@ As for the RE model, we implement two distinct metrics \cite{bekoulis-etal-2018-
 Employing these metrics allows us to meticulously evaluate the nuanced capabilities of our models, ensuring that they not only perform well statistically but also meet the practical demands of real-world applications where precision and reliability are paramount.
 
 \section{Implementation}
+\label{sec:implementation}
+In this implementation, we have adapted the PURE entity and relation extraction system originally developed by Zhong et al.\cite{Zhong2020AFE}, available on their GitHub repository\cite{pure-github-repo}. Our objective was to reimplement their system using Jupyter notebooks to enhance the usability and reproducibility of the model's training and evaluation processes. These notebooks are meticulously designed to ensure clarity and ease of execution across different system setups, facilitating straightforward adaptation to new datasets and domains.\\
+
+The notebooks allow for seamless integration of new Named Entity Recognition (NER) and Relation Extraction (RE) datasets, enabling quick model training and immediate inference on novel data. This approach not only democratizes the accessibility of the PURE system but also sets the stage for future enhancements where new datasets can be effortlessly incorporated.\\
+
+In this section, we provide a detailed explanation of these Jupyter notebooks. The comprehensive documentation within the notebooks ensures that each step of the model's implementation is clear and easily navigable. For those interested in exploring the system further or in replicating our study, the complete implementation is accessible through our GitHub repository at \href{https://github.com/OdaiMohammad/pure-ere-reproduction}{PURE: Entity and Relation Extraction from Text system reproduction}\cite{my-github-repo-code}.\\
+
+\subsection{Basic Setup}
+The initial setup involved configuring our computational environment to meet the requirements for our experiments. This process included installing necessary software dependencies, setting up datasets, and acquiring pre-trained models for NER and RE tasks:
+
+\textbf{System Specifications:}
+
+\begin{itemize}
+  \item Operating System: Windows 11
+  \item Processor: 11th-generation Intel Core i5 CPU
+  \item Memory: 16GB of RAM
+  \item Graphics: Nvidia GeForce RTX 3050 Ti laptop GPU with 4GB of VRAM
+  \item Software: Python 3.1.13 and pip 21.2.2
+  \item Key Library: PyTorch version 1.4.0
+\end{itemize}
+
+\textbf{Installation Process:}
+
+The setup can be carried out using the basic\_setup jupyter notebook in \href{https://github.com/OdaiMohammad/pure-ere-reproduction}{our repository}. Other than the obvious installation of Python and pip. Other libraries need to be installed. These libraries can be found the requirements.txt file on \href{https://github.com/OdaiMohammad/pure-ere-reproduction}{our repository}\cite{my-github-repo-code}. To install these requirements the following command can be used:
+
+\begin{lstlisting}[language=bash, caption=Instalation of project requirements]
+pip install -r requirements.txt
+\end{lstlisting}
+
+However, PyTorch version 1.4.0 might be challenging to install. Should any problems arise, it can be installed manually using this command:
+
+\begin{lstlisting}[language=bash, caption=Instalation of project requirements]
+pip install torch===1.4.0 torchvision===0.5.0 -f https://download.pytorch.org/whl/torch_stable.html
+\end{lstlisting}
+
+\textbf{Data Acquisition:}
+Next, the preprocessed SciERC dataset can be downloaded from their project \href{https://nlp.cs.washington.edu/sciIE/}{website}\cite{scierc-project}. For that, we have implemented some helper functions to download and extract the dataset (see appendix for more detailed code snippets).
+
+\textbf{Model Preparation:}
+Finally, pre-trained entity and relation models can be downloaded from \href{https://nlp.cs.princeton.edu/projects/pure/scierc_models/}{Princeton University's repository for PURE}\cite{pure-project-princeton-repo}. These models will be used to reproduce Zhong et al's\cite{Zhong2020AFE} results that we will build our implementation on.
+
+\subsection{Entity Model}
+\subsubsection{Setup}
+\subsubsection{Pre-trained Model}
+\subsubsection{Training}
+
+\subsection{Relation Model}
+\subsubsection{Setup}
+\subsubsection{Pre-trained Model}
+\subsubsection{Training}

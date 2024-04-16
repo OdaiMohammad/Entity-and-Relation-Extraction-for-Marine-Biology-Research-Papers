@@ -1,2 +1,30 @@
 \appendix
 % the \\ insures the section title is centered below the phrase: AppendixA
+
+\section{Example codes developed for the project}
+
+\begin{lstlisting}[language=Python, caption=Helper functions used to download and extract files]
+    def download_file(file_name, url):
+        file_name = os.getcwd() + file_name
+        os.makedirs(os.path.dirname(file_name), exist_ok=True)
+        r = requests.get(url, stream=True)
+    
+        r.raise_for_status()
+    
+        with open(file_name, 'wb') as f:
+            pbar = tqdm(unit="B", total=int(r.headers['Content-Length']), position=0, leave=True, desc='Downloading')
+            for chunk in r.iter_content(chunk_size=1024): 
+                if chunk: # filter out keep-alive new chunks
+                    pbar.update(len(chunk))
+                    f.write(chunk)
+    
+    def extract_tar_file(file_name, target_directory):
+        with tarfile.open(name=os.getcwd() + file_name) as tar:
+            for member in tqdm(iterable=tar.getmembers(), total=len(tar.getmembers()), desc='Extracting'):
+                tar.extract(member=member, path=os.getcwd() + target_directory) 
+    
+    def unzip_file(file_name, target_directory):
+        with zipfile.ZipFile(os.getcwd() + file_name) as zf:
+            for member in tqdm(zf.infolist(), desc='Extracting'):
+                zf.extract(member, os.getcwd() + target_directory)
+\end{lstlisting}
